@@ -1,0 +1,29 @@
+name: Auto Update Proxy
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch proxy from API
+        run: |
+          PROXY=$(curl -s "http://lb.buchudui.asia/proxy.txt?key=shabi")
+          echo "获取到的代理: $PROXY"
+          echo "$PROXY" > proxy.txt
+
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add proxy.txt
+          git diff --cached --quiet || git commit -m "自动更新代理: $(cat proxy.txt)"
+          git push
