@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f3e9">
+  <title>鹈鹏的兜风日 · SVG 动画</title>
+  <style>
+    :root { color-scheme: light; --paper:#f6f3e9; --ink:#243f3b; --muted:#778780; --orange:#ec7547; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"Microsoft YaHei","PingFang SC",sans-serif; }
+    main { max-width:1440px; min-height:100svh; margin:auto; padding:38px 5.5vw 24px; display:flex; flex-direction:column; }
+    header { display:flex; justify-content:space-between; align-items:center; gap:20px; padding-bottom:22px; border-bottom:1px solid #243f3b26; }
+    .brand { font-weight:700; font-size:14px; letter-spacing:.18em; display:flex; align-items:center; gap:12px; }
+    .brand svg { width:29px; height:29px; }
+    .edition { font-size:11px; letter-spacing:.15em; color:var(--muted); }
+    .intro { padding:42px 0 0; position:relative; z-index:1; }
+    .eyebrow { font-size:11px; letter-spacing:.23em; color:#a36343; margin:0 0 14px; }
+    h1 { font-size:clamp(32px,4.6vw,64px); font-weight:500; letter-spacing:.04em; line-height:1.25; margin:0; }
+    h1 span { color:#638b72; }
+    .intro p:last-child { color:var(--muted); font-size:13px; letter-spacing:.12em; line-height:1.9; margin:17px 0 0; }
+    .stage { position:relative; flex:1; display:flex; align-items:center; margin-top:-48px; min-height:320px; }
+    #scene { display:block; width:100%; height:auto; max-height:66vh; overflow:hidden; }
+    footer { display:flex; justify-content:space-between; align-items:center; gap:20px; padding-top:19px; border-top:1px solid #243f3b26; }
+    .caption { font-size:12px; color:var(--muted); letter-spacing:.06em; line-height:1.9; }
+    .caption strong { font-weight:500; color:var(--ink); }
+    button { display:flex; align-items:center; gap:10px; flex-shrink:0; border:1px solid #243f3b45; border-radius:30px; padding:12px 20px; color:var(--ink); background:transparent; font:inherit; font-size:12px; cursor:pointer; transition:background .2s; }
+    button:hover { background:#e7ebe0; }
+    button:focus-visible { outline:3px solid var(--orange); outline-offset:4px; }
+    #buttonIcon { width:13px; height:13px; }
+    @media (max-width:600px) {
+      main { padding:24px 6vw; min-height:100svh; }
+      .edition { font-size:9px; letter-spacing:.04em; }
+      .intro { padding-top:36px; }
+      .stage { margin:0 -6vw; min-height:300px; }
+      #scene { width:140%; max-width:none; margin-left:-20%; flex-shrink:0; }
+      .caption { font-size:10px; }
+      button { padding:11px 14px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor"/><path d="M8 19q7-1 9-10-1 9 8 8-5 8-12 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      鹈鹏漫游记
+    </div>
+    <div class="edition">VOL. 01 &nbsp; / &nbsp; A LITTLE JOY IN MOTION</div>
+  </header>
+  <section class="intro">
+    <p class="eyebrow">THE SLOW SUNDAY CLUB</p>
+    <h1>风很轻，<span>慢慢骑。</span></h1>
+    <p>不急着抵达，先和沿途的风打个招呼。</p>
+  </section>
+  <div class="stage">
+    <svg id="scene" viewBox="0 0 1200 650" role="img" aria-labelledby="sceneTitle sceneDesc" xmlns="http://www.w3.org/2000/svg">
+      <title id="sceneTitle">鹈鹏骑自行车的二维动画</title>
+      <desc id="sceneDesc">一只戴绿色头盔、系橙色围巾的白色长喙鸟，骑着青绿色自行车穿过起伏的草地。双脚轮流踩踏，车轮转动，云朵与草地向后移动。</desc>
+      <defs>
+        <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f4d49a"/><stop offset="1" stop-color="#f3deb1"/></linearGradient>
+        <linearGradient id="pouch" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f3b66f"/><stop offset="1" stop-color="#e88d57"/></linearGradient>
+        <pattern id="hillsBack" width="1200" height="650" patternUnits="userSpaceOnUse"><path d="M0 481Q145 358 326 438T650 414T940 436T1200 481V650H0Z" fill="#e6e9d8"/></pattern>
+        <pattern id="hillsFront" width="1200" height="650" patternUnits="userSpaceOnUse"><path d="M0 526Q180 466 318 494T625 476T915 495T1200 526V650H0Z" fill="#d2ddc2"/></pattern>
+        <pattern id="grassPattern" width="390" height="650" patternUnits="userSpaceOnUse">
+          <path d="M36 553l-5-13m5 13 7-9m192 20-3-14m3 14 8-10" fill="none" stroke="#87a58a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M327 553v-13m-4 7 4 3 5-7" fill="none" stroke="#87a58a" stroke-width="2"/>
+          <circle cx="327" cy="537" r="4" fill="#f4f1dc"/><circle cx="327" cy="537" r="1.6" fill="#dfa953"/>
+        </pattern>
+        <pattern id="roadPattern" width="290" height="650" patternUnits="userSpaceOnUse"><path d="M15 621h62m128-16h23" stroke="#d1cbbb" stroke-width="3" stroke-linecap="round"/></pattern>
+        <g id="wheel">
+          <circle r="99" fill="#f6f3e9" fill-opacity=".52" stroke="#2e4641" stroke-width="12"/>
+          <circle r="90" fill="none" stroke="#a4b5a2" stroke-width="2"/>
+          <g stroke="#a0afa2" stroke-width="1.7">
+            <path d="M-88 0H88M0-88V88M-62-62 62 62M-62 62 62-62M-81-34 81 34M-34-81 34 81M-81 34 81-34M-34 81 34-81"/>
+          </g>
+          <path d="M-40-90A99 99 0 0 1 37-92" fill="none" stroke="#62756a" stroke-width="3" stroke-linecap="round"/>
+          <rect x="-5" y="-83" width="10" height="18" rx="3" fill="#edb971"/>
+          <circle r="9" fill="#f7eed8" stroke="#304d47" stroke-width="4"/>
+        </g>
+      </defs>
+      <!-- The scenery is repeated with SVG patterns for seamless movement. -->
+      <circle cx="943" cy="163" r="64" fill="url(#sun)"/>
+      <circle cx="943" cy="163" r="83" fill="none" stroke="#ebddbb" stroke-width="1" stroke-dasharray="2 10"/>
+      <g id="clouds" fill="#fffdf5" opacity=".9">
+        <path d="M91 241c-17-4-15-22 3-23-1-23 36-31 48-10 19-8 37 7 31 22 17-2 22 12 10 15H91Z"/>
+        <path d="M810 276c-15-2-12-20 3-20 3-25 34-28 44-9 22-8 37 8 29 22 19-3 21 13 8 14H810Z"/>
+        <path d="M1079 331c-12-2-13-16 1-19 1-19 29-23 38-6 16-5 30 5 26 18 15 0 16 12 5 13h-70Z"/>
+      </g>
+      <g fill="none" stroke="#92a49a" stroke-width="2" stroke-linecap="round"><path d="M805 138q10-10 20 0 10-10 20 0"/><path d="M850 112q7-7 14 0 7-7 14 0"/></g>
+      <rect width="1200" height="650" fill="url(#hillsBack)"/>
+      <rect width="1200" height="650" fill="url(#hillsFront)"/>
+      <rect width="1200" height="650" fill="url(#grassPattern)"/>
+      <path d="M0 586Q600 582 1200 586V650H0Z" fill="#eae4d5"/>
+      <path d="M0 586H1200" stroke="#b4bca2" stroke-width="2"/>
+      <rect width="1200" height="650" fill="url(#roadPattern)"/>
+      <ellipse id="shadow" cx="565" cy="593" rx="251" ry="13" fill="#536c50" opacity=".12"/>
+      <g id="rider">
+        <!-- Wheels and the far leg sit behind the bicycle frame. -->
+        <g transform="translate(420 485)"><g id="rearWheel"><use href="#wheel"/></g></g>
+        <g transform="translate(730 485)"><g id="frontWheel"><use href="#wheel"/></g></g>
+        <g stroke="#b67645" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" fill="none"><path id="farLeg" d="M535 360 568 402 560 485"/></g>
+        <path id="farFoot" d="M550 485h28" fill="none" stroke="#b67645" stroke-width="13" stroke-linecap="round"/>
+        <!-- A classic step-through green bicycle. -->
+        <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M411 374h81m-79 0-13 61" stroke="#728d79" stroke-width="5"/>
+          <path d="M331 431A106 106 0 0 1 505 419M651 414A108 108 0 0 1 817 425" stroke="#6b9887" stroke-width="7"/>
+          <path d="M420 485 501 367 588 485H420L502 377M588 485 690 369M505 390Q580 460 684 398M676 333 730 485" stroke="#244e46" stroke-width="12"/>
+          <path d="M420 485 501 367 588 485M588 485 690 369M505 390Q580 460 684 398M676 333 730 485" stroke="#6da695" stroke-width="6"/>
+          <path d="M504 374 496 347" stroke="#50665c" stroke-width="7"/>
+          <path d="M677 335 668 311 699 303q17-4 18 10" stroke="#52695e" stroke-width="7"/>
+          <path d="M691 304 706 302" stroke="#354a42" stroke-width="10"/>
+          <path d="M708 317Q752 353 702 392" stroke="#3b5145" stroke-width="2"/>
+          <path d="M420 478 588 461a24 24 0 0 1 0 48L420 492a7 7 0 0 1 0-14Z" stroke="#637869" stroke-width="3"/>
+        </g>
+        <path d="M469 343q0-9 12-9h41q13 1 9 10c-4 8-52 10-62-1Z" fill="#865840"/>
+        <path d="M475 337h46" stroke="#bc8964" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="588" cy="485" r="24" fill="#d6dfc9" stroke="#507568" stroke-width="4"/>
+        <circle cx="588" cy="485" r="15" fill="none" stroke="#8da38e" stroke-width="2" stroke-dasharray="3 5"/>
+        <path id="crank" d="M555 485H621" stroke="#455b50" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="588" cy="485" r="6" fill="#f7eed8"/>
+        <path id="farPedal" d="M542 491h27" stroke="#344e43" stroke-width="7" stroke-linecap="round"/>
+        <!-- The silhouette, neck, beak and wing are all original SVG paths. -->
+        <g id="bird">
+          <path id="scarfTail" d="M604 261Q563 236 522 250L490 237 498 260Q550 287 609 278Z" fill="#dd6941"/>
+          <path d="M449 310 391 281q4 32 43 60l-53-13q20 30 70 28" fill="#e3e4d4" stroke="#344d43" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M445 302C421 315 431 357 479 372 514 383 563 370 590 339 619 306 611 281 637 257 660 237 685 226 681 202 677 178 654 169 633 179 595 196 602 225 580 253 551 288 485 279 445 302Z" fill="#fffdf1" stroke="#344d43" stroke-width="3.5"/>
+          <path d="M448 343Q493 385 554 347 592 323 596 295" fill="none" stroke="#e3e7d8" stroke-width="14" stroke-linecap="round"/>
+          <path d="M674 208 795 222Q774 261 718 262 682 259 663 230Z" fill="url(#pouch)" stroke="#744f36" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M671 201Q730 193 801 218q6 4-5 8L672 224Z" fill="#efb25e" stroke="#744f36" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M687 215 779 220" stroke="#ffd692" stroke-width="3" stroke-linecap="round"/>
+          <path d="M681 232q22 21 52 20" stroke="#d58653" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="657" cy="198" r="5.2" fill="#263f37"/><circle cx="658.5" cy="196.5" r="1.4" fill="white"/>
+          <path d="M647 184q9-4 15 0" stroke="#344d43" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <ellipse cx="650" cy="215" rx="10" ry="6" fill="#edc8ac" opacity=".75"/>
+          <path d="M605 177Q603 142 637 141q32-2 39 34Z" fill="#648c74" stroke="#344d43" stroke-width="3"/>
+          <path d="M620 151 617 168m18-20-2 18m18-16 1 17" stroke="#365b48" stroke-width="5" stroke-linecap="round"/>
+          <path d="M601 177q38-10 82-1" stroke="#344d43" stroke-width="6" stroke-linecap="round"/>
+          <path d="M611 179 623 222 641 228 654 226" fill="none" stroke="#7f947d" stroke-width="3" stroke-linejoin="round"/>
+          <rect x="635" y="224" width="10" height="6" rx="2" fill="#344d43"/>
+          <path d="M589 256q9 9 28 13l-5 18q-22-2-35-13Z" fill="#ec7547" stroke="#a65635" stroke-width="2"/>
+          <path d="M607 270q15-7 15 5t-14 10q-9-2-1-15Z" fill="#f08c56"/>
+          <path d="M488 296C516 281 538 296 563 315Q607 343 676 313q13-5 17 3t-9 15C643 358 574 364 532 345Q499 334 488 311" fill="#edf0df" stroke="#344d43" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M510 306Q530 325 557 330m-49-12q13 13 32 17" fill="none" stroke="#b9c7b2" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M678 313q8 3 7 12m-1-15q9 4 8 12" fill="none" stroke="#344d43" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+        <path id="nearLeg" d="M530 359 555 417 621 485" fill="none" stroke="#dda153" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+        <path id="nearFoot" d="M610 485h28" fill="none" stroke="#e8ac59" stroke-width="14" stroke-linecap="round"/>
+        <path id="nearPedal" d="M608 493h29" stroke="#344e43" stroke-width="7" stroke-linecap="round"/>
+      </g>
+      <g id="wind" fill="none" stroke="#a4b5a0" stroke-width="2.5" stroke-linecap="round" opacity=".65"><path d="M338 244h48m-72 17h33M348 285h24"/></g>
+      <g transform="translate(982 404) rotate(8)" fill="#607e67"><path d="M0 0q-18-21-22-5T0 0q15-25 22-11T0 0"/><path d="M0 0 3 9" stroke="#607e67" stroke-width="2"/></g>
+    </svg>
+  </div>
+  <footer>
+    <div class="caption"><strong>今日行程：随风而行</strong><br>一只鹈鹏，一辆单车，一整个好天气。</div>
+    <button id="toggle" type="button" aria-label="暂停动画" aria-pressed="false">
+      <svg id="buttonIcon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path id="buttonPath" d="M3 2h3v12H3zm7 0h3v12h-3z"/></svg>
+      <span id="buttonText">歇一会儿</span>
+    </button>
+  </footer>
+</main>
+<script>
+  (() => {
+    'use strict';
+    const ids = ['rearWheel','frontWheel','farLeg','farFoot','nearLeg','nearFoot','crank','farPedal','nearPedal','bird','scarfTail','clouds','wind','hillsBack','hillsFront','grassPattern','roadPattern','toggle','buttonPath','buttonText'];
+    const el = Object.fromEntries(ids.map(id => [id, document.getElementById(id)]));
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let paused = motionPreference.matches;
+    let elapsed = 0;
+    let previous = null;
+    const line = (id, x1, y1, x2, y2) => el[id].setAttribute('d', `M${x1} ${y1}L${x2} ${y2}`);
+
+    // Two-link legs keep each foot on its pedal throughout the full rotation.
+    function leg(id, hipX, hipY, footX, footY, upper, lower) {
+      const dx = footX - hipX, dy = footY - hipY;
+      const distance = Math.hypot(dx, dy);
+      const along = (upper * upper - lower * lower + distance * distance) / (2 * distance);
+      const height = Math.sqrt(Math.max(0, upper * upper - along * along));
+      const kneeX = hipX + along * dx / distance + height * dy / distance;
+      const kneeY = hipY + along * dy / distance - height * dx / distance;
+      el[id].setAttribute('d', `M${hipX} ${hipY}Q${kneeX} ${kneeY} ${kneeX} ${kneeY}L${footX} ${footY}`);
+    }
+
+    function draw(t) {
+      const angle = t * Math.PI * 2 / 1.75;
+      const bob = Math.sin(angle * 2) * 2;
+      const x = 588 + 33 * Math.cos(angle), y = 485 + 33 * Math.sin(angle);
+      const farX = 1176 - x, farY = 970 - y;
+      const wheelDegrees = (t * 145) % 360;
+      el.rearWheel.setAttribute('transform', `rotate(${wheelDegrees})`);
+      el.frontWheel.setAttribute('transform', `rotate(${wheelDegrees})`);
+      el.bird.setAttribute('transform', `translate(0 ${bob})`);
+      leg('nearLeg', 532, 359 + bob, x, y - 7, 84, 89);
+      leg('farLeg', 543, 355 + bob, farX, farY - 7, 84, 89);
+      line('nearFoot', x - 8, y - 6, x + 17, y - 6);
+      line('farFoot', farX - 8, farY - 6, farX + 17, farY - 6);
+      line('nearPedal', x - 11, y + 3, x + 19, y + 3);
+      line('farPedal', farX - 11, farY + 3, farX + 19, farY + 3);
+      line('crank', farX, farY, x, y);
+      const flutter = Math.sin(angle * 2.1) * 8;
+      el.scarfTail.setAttribute('d', `M604 261Q563 ${238 + flutter} 522 ${249 + flutter}L487 ${239 + flutter} 498 ${261 + flutter}Q550 ${282 + flutter} 609 278Z`);
+      el.hillsBack.setAttribute('patternTransform', `translate(${-t * 9 % 1200} 0)`);
+      el.hillsFront.setAttribute('patternTransform', `translate(${-t * 23 % 1200} 0)`);
+      el.grassPattern.setAttribute('patternTransform', `translate(${-t * 150 % 390} 0)`);
+      el.roadPattern.setAttribute('patternTransform', `translate(${-t * 250 % 290} 0)`);
+      el.clouds.setAttribute('transform', `translate(${-22 * Math.sin(t / 12)} ${Math.sin(t / 4) * 3})`);
+      el.wind.setAttribute('transform', `translate(${-8 * Math.sin(angle)} 0)`);
+      el.wind.setAttribute('opacity', .4 + .2 * Math.sin(angle));
+    }
+
+    function updateButton() {
+      el.toggle.setAttribute('aria-pressed', String(paused));
+      el.toggle.setAttribute('aria-label', paused ? '播放动画' : '暂停动画');
+      el.buttonText.textContent = paused ? '继续兜风' : '歇一会儿';
+      el.buttonPath.setAttribute('d', paused ? 'M4 2l10 6-10 6z' : 'M3 2h3v12H3zm7 0h3v12h-3z');
+    }
+    el.toggle.addEventListener('click', () => { paused = !paused; updateButton(); });
+    motionPreference.addEventListener('change', event => { paused = event.matches; updateButton(); });
+    document.addEventListener('visibilitychange', () => { previous = null; });
+    function frame(now) {
+      if (previous !== null && !paused && !document.hidden) {
+        elapsed += Math.min((now - previous) / 1000, .05);
+        draw(elapsed);
+      }
+      previous = now;
+      requestAnimationFrame(frame);
+    }
+    updateButton();
+    draw(0);
+    requestAnimationFrame(frame);
+  })();
+</script>
+</body>
+</html>
